@@ -3,7 +3,7 @@ import { Navigate, useNavigate } from "react-router-dom";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { getMe } from "../api/me";
 
-import logo from '../assets/lb_logo_4_dark_background.svg';
+import logo from '../assets/tradeTalks.svg';
 import toast from "react-hot-toast";
 
 const Dashboard = () => {
@@ -63,7 +63,7 @@ const Dashboard = () => {
     const styles = {
         container: {
             padding: isMobile ? "20px 16px 120px 16px" : "40px 60px",
-            backgroundColor: "#fff7ed", // Orange-50
+            backgroundColor: "#eff6ff", // Blue-50
             minHeight: "100vh",
             fontFamily: "'Plus Jakarta Sans', sans-serif",
             color: "#1e293b" // Slate-800
@@ -77,7 +77,7 @@ const Dashboard = () => {
         },
         referralCard: {
             background: "#ffffff",
-            border: "1px solid #fed7aa", // Orange-200
+            border: "1px solid #bfdbfe", // Blue-200
             borderRadius: "16px",
             padding: "16px 20px",
             display: "flex",
@@ -86,7 +86,7 @@ const Dashboard = () => {
             marginBottom: "32px",
             cursor: "pointer",
             transition: "all 0.2s",
-            boxShadow: "0 4px 6px -1px rgba(249, 115, 22, 0.1)"
+            boxShadow: "0 4px 6px -1px rgba(37, 99, 235, 0.1)"
         },
         logoutBtn: {
             padding: "12px 24px",
@@ -114,26 +114,26 @@ const Dashboard = () => {
             background: "#ffffff",
             padding: isMobile ? "24px" : "32px",
             borderRadius: "24px",
-            border: "1px solid #fed7aa", // Orange-200
-            boxShadow: "0 10px 15px -3px rgba(249, 115, 22, 0.05)"
+            border: "1px solid #bfdbfe", // Blue-200
+            boxShadow: "0 10px 15px -3px rgba(37, 99, 235, 0.05)"
         },
         tableWrapper: {
             background: "#ffffff",
             borderRadius: "24px",
-            border: "1px solid #fed7aa", // Orange-200
+            border: "1px solid #bfdbfe", // Blue-200
             overflow: "hidden",
-            boxShadow: "0 10px 15px -3px rgba(249, 115, 22, 0.05)"
+            boxShadow: "0 10px 15px -3px rgba(37, 99, 235, 0.05)"
         },
         table: { width: "100%", borderCollapse: "separate" as const, borderSpacing: "0" },
         th: {
             textAlign: "left" as const,
             padding: "16px 24px",
-            backgroundColor: "#fff7ed", // Orange-50
+            backgroundColor: "#eff6ff", // Blue-50
             color: "#64748b", // Slate-500
             fontSize: "0.7rem",
             textTransform: "uppercase" as const,
             letterSpacing: "0.1em",
-            borderBottom: "1px solid #fed7aa"
+            borderBottom: "1px solid #bfdbfe"
         },
         td: {
             padding: "16px 24px",
@@ -169,8 +169,8 @@ const Dashboard = () => {
             justifyContent: "center",
             alignItems: "center",
             height: "100vh",
-            backgroundColor: "#fff7ed",
-            color: "#f97316",
+            backgroundColor: "#eff6ff",
+            color: "#2563eb",
             fontSize: "1.2rem"
         }
     };
@@ -196,16 +196,16 @@ const Dashboard = () => {
             <div
                 style={styles.referralCard as any}
                 onClick={handleCopyLink}
-                onMouseOver={(e) => (e.currentTarget.style.borderColor = "#f97316")}
-                onMouseOut={(e) => (e.currentTarget.style.borderColor = "#fed7aa")}
+                onMouseOver={(e) => (e.currentTarget.style.borderColor = "#2563eb")}
+                onMouseOut={(e) => (e.currentTarget.style.borderColor = "#bfdbfe")}
             >
                 <div>
-                    <p style={{ margin: 0, fontSize: "0.75rem", color: "#f97316", fontWeight: 700, textTransform: "uppercase" }}>Your Referral Link</p>
+                    <p style={{ margin: 0, fontSize: "0.75rem", color: "#2563eb", fontWeight: 700, textTransform: "uppercase" }}>Your Referral Link</p>
                     <p style={{ margin: "4px 0 0 0", fontSize: isMobile ? "0.85rem" : "1rem", color: "#334155", opacity: 0.8 }}>
                         {window.location.origin}/register/{collegeUser?.referralCode}
                     </p>
                 </div>
-                <div style={{ backgroundColor: copied ? "#10b981" : "#f97316", color: "white", padding: "8px 16px", borderRadius: "8px", fontSize: "0.8rem", fontWeight: 600 }}>
+                <div style={{ backgroundColor: copied ? "#10b981" : "#2563eb", color: "white", padding: "8px 16px", borderRadius: "8px", fontSize: "0.8rem", fontWeight: 600 }}>
                     {copied ? "Copied!" : "Copy"}
                 </div>
             </div>
@@ -231,9 +231,9 @@ const Dashboard = () => {
                             <p style={{ color: "#64748b", margin: "0 0 8px 0", fontSize: "0.75rem", fontWeight: "600", display: 'flex', alignItems: 'center', gap: '4px' }}>
                                 YOUR RANK <span style={{ fontSize: '0.9rem' }}>🏆</span>
                             </p>
-                            <h2 style={{ margin: 0, fontSize: "1.4rem", color: "#f97316" }}>#{collegeUser?.rank || '-'}</h2>
+                            <h2 style={{ margin: 0, fontSize: "1.4rem", color: "#2563eb" }}>#{collegeUser?.rank || '-'}</h2>
                         </div>
-                        <div style={{ color: "#f97316", opacity: 0.5 }}>➜</div>
+                        <div style={{ color: "#2563eb", opacity: 0.5 }}>➜</div>
                     </div>
                 </div>
             </div>

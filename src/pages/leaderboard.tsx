@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { fetchLeaderboard } from "../api/leaderboard";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import logo from '../assets/lb_logo_4_dark_background.svg';
+import logo from '../assets/tradeTalks.svg';
 
 const Leaderboard = () => {
     const navigate = useNavigate();
@@ -22,7 +22,7 @@ const Leaderboard = () => {
     const styles = {
         wrapper: {
             minHeight: '100vh',
-            backgroundColor: '#fff7ed', // Orange-50
+            backgroundColor: '#eff6ff', // Blue-50
             padding: isMobile ? '20px' : '40px',
             fontFamily: "'Plus Jakarta Sans', sans-serif"
         },
@@ -38,11 +38,11 @@ const Leaderboard = () => {
         },
         backButton: {
             backgroundColor: 'transparent',
-            border: '1px solid #fed7aa', // Orange-200
+            border: '1px solid #bfdbfe', // Blue-200
             padding: '8px 16px',
             borderRadius: '8px',
             cursor: 'pointer',
-            color: '#f97316', // Orange-500
+            color: '#2563eb', // Blue-600
             fontWeight: '600',
             fontSize: '0.9rem',
             transition: 'all 0.2s',
@@ -53,7 +53,7 @@ const Leaderboard = () => {
         card: {
             backgroundColor: '#ffffff',
             borderRadius: '24px',
-            border: '1px solid #fed7aa', // Orange-200
+            border: '1px solid #bfdbfe', // Blue-200
             boxShadow: '0 10px 15px -3px rgba(249, 115, 22, 0.05)',
             overflow: 'hidden'
         },
@@ -64,13 +64,13 @@ const Leaderboard = () => {
         th: {
             textAlign: 'left' as const,
             padding: '16px 24px',
-            backgroundColor: '#fff7ed', // Orange-50
+            backgroundColor: '#eff6ff', // Blue-50
             color: '#64748b', // Slate-500
             fontSize: '0.75rem',
             fontWeight: '700',
             textTransform: 'uppercase' as const,
             letterSpacing: '0.05em',
-            borderBottom: '1px solid #fed7aa'
+            borderBottom: '1px solid #bfdbfe'
         },
         td: {
             padding: '16px 24px',
@@ -88,9 +88,9 @@ const Leaderboard = () => {
             fontWeight: '700',
             fontSize: '0.9rem'
         },
-        gold: { backgroundColor: '#fef3c7', color: '#d97706', border: '1px solid #fcd34d' },
-        silver: { backgroundColor: '#f1f5f9', color: '#64748b', border: '1px solid #cbd5e1' },
-        bronze: { backgroundColor: '#ffedd5', color: '#c2410c', border: '1px solid #fdba74' },
+        gold: { backgroundColor: '#dbeafe', color: '#1e40af', border: '1px solid #93c5fd' }, // Blue-100/800/300
+        silver: { backgroundColor: '#f1f5f9', color: '#475569', border: '1px solid #cbd5e1' }, // Slate-100/600/300
+        bronze: { backgroundColor: '#e0f2fe', color: '#0369a1', border: '1px solid #7dd3fc' }, // Sky-100/700/300
         defaultRank: { color: '#64748b' }
     };
 
@@ -101,7 +101,7 @@ const Leaderboard = () => {
         return styles.defaultRank;
     };
 
-    if (isLoading) return <div style={{ ...styles.wrapper, display: 'flex', justifyContent: 'center', alignItems: 'center', color: '#f97316' }}>Loading Leaderboard...</div>;
+    if (isLoading) return <div style={{ ...styles.wrapper, display: 'flex', justifyContent: 'center', alignItems: 'center', color: '#2563eb' }}>Loading Leaderboard...</div>;
     if (error) return <div style={{ ...styles.wrapper, display: 'flex', justifyContent: 'center', alignItems: 'center', color: '#ef4444' }}>Error loading leaderboard</div>;
 
     return (
@@ -111,7 +111,7 @@ const Leaderboard = () => {
                     <button
                         style={styles.backButton}
                         onClick={() => navigate('/home')}
-                        onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#fff7ed'}
+                        onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#eff6ff'}
                         onMouseOut={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
                     >
                         ← Back to Dashboard
@@ -142,7 +142,7 @@ const Leaderboard = () => {
                                     <td style={{ ...styles.td, fontWeight: '600' }}>
                                         {user.name}
                                     </td>
-                                    <td style={{ ...styles.td, textAlign: 'right', fontWeight: '700', color: '#f97316' }}>{user.referralCount}</td>
+                                    <td style={{ ...styles.td, textAlign: 'right', fontWeight: '700', color: '#2563eb' }}>{user.referralCount}</td>
                                 </tr>
                             ))}
                         </tbody>

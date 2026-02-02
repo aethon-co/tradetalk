@@ -4,7 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import { signupUser } from '../api/user';
 import toast from 'react-hot-toast';
-import logo from '../assets/lb_logo_4_dark_background.svg';
+import logo from '../assets/tradeTalks.svg';
 
 export default function College() {
     const navigate = useNavigate();
@@ -72,7 +72,7 @@ export default function College() {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            backgroundColor: '#fff7ed', // Orange-50
+            backgroundColor: '#eff6ff', // Blue-50
             padding: '20px',
             fontFamily: "'Plus Jakarta Sans', sans-serif"
         },
@@ -82,8 +82,8 @@ export default function College() {
             backgroundColor: '#ffffff',
             padding: '40px',
             borderRadius: '24px',
-            border: '1px solid #fed7aa', // Orange-200
-            boxShadow: '0 25px 50px -12px rgba(249, 115, 22, 0.15)' // Orange shadow
+            border: '1px solid #bfdbfe', // Blue-200
+            boxShadow: '0 25px 50px -12px rgba(37, 99, 235, 0.15)' // Blue shadow
         },
         title: {
             color: '#1e293b', // Slate-800
@@ -118,7 +118,7 @@ export default function College() {
         },
         buttonPrimary: {
             width: '100%',
-            backgroundColor: '#f97316', // Orange-500
+            backgroundColor: '#2563eb', // Blue-600
             color: 'white',
             padding: '14px',
             borderRadius: '12px',
@@ -136,7 +136,7 @@ export default function College() {
             marginTop: '20px'
         },
         link: {
-            color: '#f97316', // Orange-500
+            color: '#2563eb', // Blue-600
             cursor: 'pointer',
             fontWeight: '600',
             marginLeft: '5px',
@@ -169,6 +169,8 @@ export default function College() {
                             onChange={handleChange}
                             type="email"
                             placeholder="Email Address"
+                            onFocus={(e) => !emailError && (e.currentTarget.style.borderColor = '#2563eb')}
+                            onBlur={(e) => !emailError && (e.currentTarget.style.borderColor = '#cbd5e1')}
                         />
                         {emailError && <span style={{ color: '#ef4444', fontSize: '0.75rem', marginTop: '4px', display: 'block' }}>{emailError}</span>}
                     </div>
@@ -191,6 +193,8 @@ export default function College() {
                                 inputMode="numeric"
                                 placeholder="Phone Number"
                                 maxLength={10}
+                                onFocus={(e) => !phoneError && (e.currentTarget.style.borderColor = '#2563eb')}
+                                onBlur={(e) => !phoneError && (e.currentTarget.style.borderColor = '#cbd5e1')}
                             />
                             {phoneError && <span style={{ color: '#ef4444', fontSize: '0.75rem', marginTop: '4px', display: 'block' }}>{phoneError}</span>}
                         </div>
@@ -215,7 +219,14 @@ export default function College() {
 
                 <div style={styles.footerText as any}>
                     Already have an account?
-                    <span style={styles.link as any} onClick={() => navigate("/login")}>Login</span>
+                    <span
+                        style={styles.link as any}
+                        onClick={() => navigate("/login")}
+                        onMouseOver={(e) => (e.currentTarget.style.color = '#1d4ed8')}
+                        onMouseOut={(e) => (e.currentTarget.style.color = '#2563eb')}
+                    >
+                        Login
+                    </span>
                 </div>
 
 

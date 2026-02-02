@@ -8,7 +8,7 @@ const SchoolStudent = () => {
             flexDirection: 'column' as const,
             alignItems: 'center',
             justifyContent: 'center',
-            backgroundColor: '#fff7ed',
+            backgroundColor: '#eff6ff',
             padding: '20px',
             fontFamily: "'Plus Jakarta Sans', sans-serif"
         },
@@ -18,8 +18,8 @@ const SchoolStudent = () => {
             backgroundColor: '#ffffff',
             padding: '40px',
             borderRadius: '24px',
-            border: '1px solid #fed7aa',
-            boxShadow: '0 25px 50px -12px rgba(249, 115, 22, 0.15)',
+            border: '1px solid #bfdbfe',
+            boxShadow: '0 25px 50px -12px rgba(37, 99, 235, 0.15)',
             display: 'flex',
             flexDirection: 'column' as const,
             gap: '16px'
@@ -37,7 +37,7 @@ const SchoolStudent = () => {
         },
         button: {
             width: '100%',
-            backgroundColor: '#f97316',
+            backgroundColor: '#2563eb',
             color: 'white',
             padding: '14px',
             borderRadius: '12px',

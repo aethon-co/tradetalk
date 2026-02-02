@@ -3,13 +3,13 @@ import { useMutation } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 import { loginUser } from '../api/user';
 import toast from 'react-hot-toast';
-import logo from '../assets/lb_logo_4_dark_background.svg';
+import logo from '../assets/tradeTalks.svg';
 
 export default function Login() {
     const navigate = useNavigate();
-    const [emailError, setEmailError] = useState('');
+    const [phoneError, setPhoneError] = useState('');
     const [formData, setFormData] = useState({
-        email: '',
+        phoneNumber: '',
         password: '',
     });
 
@@ -28,13 +28,13 @@ export default function Login() {
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
-        if (e.target.name === 'email') setEmailError('');
+        if (e.target.name === 'phoneNumber') setPhoneError('');
     };
 
     const handleSubmit = () => {
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(formData.email)) {
-            setEmailError('Please enter a valid email address');
+        const phoneRegex = /^\d{10}$/;
+        if (!phoneRegex.test(formData.phoneNumber)) {
+            setPhoneError('Phone number must be exactly 10 digits');
             return;
         }
         mutation.mutate(formData);
@@ -46,7 +46,7 @@ export default function Login() {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            backgroundColor: '#fff7ed', // Orange-50
+            backgroundColor: '#eff6ff', // Blue-50
             padding: '20px',
             fontFamily: "'Plus Jakarta Sans', sans-serif"
         },
@@ -56,8 +56,8 @@ export default function Login() {
             backgroundColor: '#ffffff',
             padding: '40px',
             borderRadius: '24px',
-            border: '1px solid #fed7aa', // Orange-200
-            boxShadow: '0 25px 50px -12px rgba(249, 115, 22, 0.15)' // Orange shadow
+            border: '1px solid #bfdbfe', // Blue-200
+            boxShadow: '0 25px 50px -12px rgba(37, 99, 235, 0.15)' // Blue shadow
         },
         title: {
             color: '#1e293b', // Slate-800
@@ -92,7 +92,7 @@ export default function Login() {
         },
         buttonPrimary: {
             width: '100%',
-            backgroundColor: '#f97316', // Orange-500
+            backgroundColor: '#2563eb', // Blue-600
             color: 'white',
             padding: '14px',
             borderRadius: '12px',
@@ -109,7 +109,7 @@ export default function Login() {
             marginTop: '20px'
         },
         link: {
-            color: '#f97316', // Orange-500
+            color: '#2563eb', // Blue-600
             cursor: 'pointer',
             fontWeight: '600',
             marginLeft: '5px',
@@ -131,19 +131,21 @@ export default function Login() {
                         <input
                             style={{
                                 ...styles.input,
-                                borderColor: emailError ? '#ef4444' : '#cbd5e1'
+                                borderColor: phoneError ? '#ef4444' : '#cbd5e1'
                             } as any}
-                            name="email"
-                            value={formData.email}
+                            name="phoneNumber"
+                            value={formData.phoneNumber}
                             onChange={handleChange}
-                            type="email"
-                            placeholder="Email Address"
-                            onFocus={(e) => !emailError && (e.currentTarget.style.borderColor = '#f97316')}
-                            onBlur={(e) => !emailError && (e.currentTarget.style.borderColor = '#cbd5e1')}
+                            type="text"
+                            inputMode="numeric"
+                            maxLength={10}
+                            placeholder="Phone Number"
+                            onFocus={(e) => !phoneError && (e.currentTarget.style.borderColor = '#2563eb')}
+                            onBlur={(e) => !phoneError && (e.currentTarget.style.borderColor = '#cbd5e1')}
                         />
-                        {emailError && (
+                        {phoneError && (
                             <span style={{ color: '#ef4444', fontSize: '0.75rem', marginTop: '4px', display: 'block' }}>
-                                {emailError}
+                                {phoneError}
                             </span>
                         )}
                     </div>
@@ -155,7 +157,7 @@ export default function Login() {
                         onChange={handleChange}
                         type="password"
                         placeholder="Password"
-                        onFocus={(e) => (e.currentTarget.style.borderColor = '#f97316')}
+                        onFocus={(e) => (e.currentTarget.style.borderColor = '#2563eb')}
                         onBlur={(e) => (e.currentTarget.style.borderColor = '#cbd5e1')}
                     />
                 </div>
@@ -167,8 +169,8 @@ export default function Login() {
                     } as any}
                     onClick={handleSubmit}
                     disabled={mutation.isPending}
-                    onMouseOver={(e) => (e.currentTarget.style.backgroundColor = '#ea580c')}
-                    onMouseOut={(e) => (e.currentTarget.style.backgroundColor = '#f97316')}
+                    onMouseOver={(e) => (e.currentTarget.style.backgroundColor = '#1d4ed8')}
+                    onMouseOut={(e) => (e.currentTarget.style.backgroundColor = '#2563eb')}
                 >
                     {mutation.isPending ? "Signing in..." : "Login"}
                 </button>
@@ -178,8 +180,8 @@ export default function Login() {
                     <span
                         style={styles.link as any}
                         onClick={() => navigate("/")}
-                        onMouseOver={(e) => (e.currentTarget.style.color = '#ea580c')}
-                        onMouseOut={(e) => (e.currentTarget.style.color = '#f97316')}
+                        onMouseOver={(e) => (e.currentTarget.style.color = '#1d4ed8')}
+                        onMouseOut={(e) => (e.currentTarget.style.color = '#2563eb')}
                     >
                         Register
                     </span>
