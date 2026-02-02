@@ -1,25 +1,36 @@
 import { useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
-import { useNavigate } from 'react-router-dom';
-import { signupCollege } from '../api/college';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useEffect } from 'react';
+import { signupUser } from '../api/user';
 import toast from 'react-hot-toast';
 import logo from '../assets/lb_logo_4_dark_background.svg';
 
 export default function College() {
     const navigate = useNavigate();
+    const { referralCode: urlReferralCode } = useParams();
     const [emailError, setEmailError] = useState('');
     const [phoneError, setPhoneError] = useState('');
     const [formData, setFormData] = useState({
         name: '',
         email: '',
         password: '',
-        collegeName: '',
-        yearOfGraduation: '',
         phoneNumber: '',
+        referralCode: '',
     });
 
+    useEffect(() => {
+        if (urlReferralCode) {
+            setFormData(prev => ({ ...prev, referralCode: urlReferralCode }));
+        }
+    }, [urlReferralCode]);
+
     const mutation = useMutation({
-        mutationFn: signupCollege,
+        mutationFn: (data: any) => signupUser({
+            ...data,
+            referredBy: data.referralCode,
+            role: 'user'
+        }),
         onSuccess: (data) => {
             localStorage.setItem("token", data.token);
             localStorage.setItem("user", JSON.stringify(data.user));
@@ -139,7 +150,7 @@ export default function College() {
                 <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '24px' }}>
                     <a href="https://www.logicbox.ac/"><img src={logo} alt="LogicBox Logo" style={{ height: '40px' }} /></a>
                 </div>
-                <h1 style={styles.title as any}>College Registration</h1>
+                <h1 style={styles.title as any}>Registration</h1>
                 <p style={styles.subtitle as any}>Partner with us to empower your students</p>
 
                 <div style={styles.inputGroup as any}>
@@ -169,22 +180,7 @@ export default function College() {
                         type="password"
                         placeholder="Create Password"
                     />
-                    <input
-                        style={styles.input as any}
-                        name="collegeName"
-                        value={formData.collegeName}
-                        onChange={handleChange}
-                        placeholder="College Name"
-                    />
-                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
-                        <input
-                            style={styles.input as any}
-                            name="yearOfGraduation"
-                            value={formData.yearOfGraduation}
-                            onChange={handleChange}
-                            type="number"
-                            placeholder="Grad. Year"
-                        />
+                    <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '12px' }}>
                         <div>
                             <input
                                 style={{ ...styles.input, borderColor: phoneError ? '#ef4444' : '#cbd5e1' } as any}
@@ -199,6 +195,14 @@ export default function College() {
                             {phoneError && <span style={{ color: '#ef4444', fontSize: '0.75rem', marginTop: '4px', display: 'block' }}>{phoneError}</span>}
                         </div>
                     </div>
+                    <input
+                        style={styles.input as any}
+                        name="referralCode"
+                        value={formData.referralCode}
+                        onChange={handleChange}
+                        placeholder="Referral Code (Optional)"
+                        disabled={!!urlReferralCode}
+                    />
                 </div>
 
                 <button
@@ -214,10 +218,7 @@ export default function College() {
                     <span style={styles.link as any} onClick={() => navigate("/login")}>Login</span>
                 </div>
 
-                <div style={{ ...styles.footerText, marginTop: '10px' } as any}>
-                    Registering for a school?
-                    <span style={styles.link as any} onClick={() => navigate("/school")}>Click here</span>
-                </div>
+
             </div>
         </div>
     );

@@ -4,7 +4,7 @@ import './index.css'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { Toaster } from 'react-hot-toast'
-import School from './pages/school.tsx'
+
 import College from './pages/college.tsx'
 import Login from './pages/login.tsx'
 import Home from './pages/home.tsx'
@@ -13,8 +13,8 @@ const queryClient = new QueryClient()
 
 const router = createBrowserRouter([
   {
-    path: "/school/:referralCode?",
-    element: <School />,
+    path: "/register/:referralCode?",
+    element: <College />,
   },
   {
     path: "/",

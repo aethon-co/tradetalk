@@ -1,5 +1,5 @@
 export const deleteStudent = async (id: string) => {
-    const url = `${import.meta.env.VITE_SERVER_URL}api/v1/college/${id}`;
+    const url = `${import.meta.env.VITE_SERVER_URL}api/v1/user/${id}`;
     console.log("Deleting student at URL:", url);
     const response = await fetch(url, {
         method: "POST",

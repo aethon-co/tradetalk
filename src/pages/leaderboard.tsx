@@ -130,7 +130,6 @@ const Leaderboard = () => {
                             <tr>
                                 <th style={{ ...styles.th, width: '80px', textAlign: 'center' }}>Rank</th>
                                 <th style={styles.th}>Representative</th>
-                                {!isMobile && <th style={styles.th}>Institution</th>}
                                 <th style={{ ...styles.th, textAlign: 'right' }}>Referrals</th>
                             </tr>
                         </thead>
@@ -142,9 +141,7 @@ const Leaderboard = () => {
                                     </td>
                                     <td style={{ ...styles.td, fontWeight: '600' }}>
                                         {user.name}
-                                        {isMobile && <div style={{ fontSize: '0.8rem', color: '#64748b', fontWeight: '400', marginTop: '2px' }}>{user.collegeName}</div>}
                                     </td>
-                                    {!isMobile && <td style={styles.td}>{user.collegeName}</td>}
                                     <td style={{ ...styles.td, textAlign: 'right', fontWeight: '700', color: '#f97316' }}>{user.referralCount}</td>
                                 </tr>
                             ))}

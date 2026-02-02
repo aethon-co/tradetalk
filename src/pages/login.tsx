@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
-import { loginCollege } from '../api/login';
+import { loginUser } from '../api/user';
 import toast from 'react-hot-toast';
 import logo from '../assets/lb_logo_4_dark_background.svg';
 
@@ -14,7 +14,7 @@ export default function Login() {
     });
 
     const mutation = useMutation({
-        mutationFn: loginCollege,
+        mutationFn: loginUser,
         onSuccess: (data) => {
             localStorage.setItem("token", data.token);
             localStorage.setItem("user", JSON.stringify(data.user));
