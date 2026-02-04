@@ -45,7 +45,7 @@ const Dashboard = () => {
 
     const handleCopyLink = () => {
         if (collegeUser?.referralCode) {
-            const fullLink = `${window.location.origin}/register/${collegeUser.referralCode}`;
+            const fullLink = `https://tradetalk-auth.vercel.app/register/${collegeUser.referralCode}`;
             navigator.clipboard.writeText(fullLink);
             setCopied(true);
             setTimeout(() => setCopied(false), 2000);
@@ -183,7 +183,7 @@ const Dashboard = () => {
 
             <div style={styles.nav}>
                 <div>
-                    <a href="https://www.logicbox.ac/"><img src={logo} alt="LogicBox" style={{ height: isMobile ? "32px" : "48px" }} /></a>
+                    <a href="https://www.tradetalks.co.in/kerala-traders-summit"><img src={logo} alt="LogicBox" style={{ height: isMobile ? "32px" : "48px" }} /></a>
                     <p style={{ color: "#64748b", marginTop: "4px", fontSize: "0.9rem" }}>Manage your referrals and uploads</p>
                 </div>
                 {isMobile && (
@@ -202,7 +202,7 @@ const Dashboard = () => {
                 <div>
                     <p style={{ margin: 0, fontSize: "0.75rem", color: "#2563eb", fontWeight: 700, textTransform: "uppercase" }}>Your Referral Link</p>
                     <p style={{ margin: "4px 0 0 0", fontSize: isMobile ? "0.85rem" : "1rem", color: "#334155", opacity: 0.8 }}>
-                        {window.location.origin}/register/{collegeUser?.referralCode}
+                        {`https://tradetalk-auth.vercel.app/register/${collegeUser?.referralCode}`}
                     </p>
                 </div>
                 <div style={{ backgroundColor: copied ? "#10b981" : "#2563eb", color: "white", padding: "8px 16px", borderRadius: "8px", fontSize: "0.8rem", fontWeight: 600 }}>

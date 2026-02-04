@@ -11,6 +11,8 @@ export default function College() {
     const { referralCode: urlReferralCode } = useParams();
     const [emailError, setEmailError] = useState('');
     const [phoneError, setPhoneError] = useState('');
+    const [nameError, setNameError] = useState('');
+    const [passwordError, setPasswordError] = useState('');
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -26,11 +28,17 @@ export default function College() {
     }, [urlReferralCode]);
 
     const mutation = useMutation({
-        mutationFn: (data: any) => signupUser({
-            ...data,
-            referredBy: data.referralCode,
-            role: 'user'
-        }),
+        mutationFn: (data: any) => {
+            const payload = {
+                ...data,
+                referredBy: data.referralCode || null,
+                role: 'user'
+            };
+            // Remove referralCode from payload to avoid overriding auto-generated code (or unique error)
+            // We use 'referredBy' to store the referrer's code.
+            delete payload.referralCode;
+            return signupUser(payload);
+        },
         onSuccess: (data) => {
             localStorage.setItem("token", data.token);
             localStorage.setItem("user", JSON.stringify(data.user));
@@ -46,6 +54,8 @@ export default function College() {
         setFormData({ ...formData, [e.target.name]: e.target.value });
         if (e.target.name === 'email') setEmailError('');
         if (e.target.name === 'phoneNumber') setPhoneError('');
+        if (e.target.name === 'name') setNameError('');
+        if (e.target.name === 'password') setPasswordError('');
     };
 
     const handleSubmit = () => {
@@ -56,10 +66,22 @@ export default function College() {
             return;
         }
 
+        // Name Validation
+        if (formData.name.trim().length < 3) {
+            setNameError('Name must be at least 3 characters long');
+            return;
+        }
+
         // Phone Validation
         const phoneRegex = /^\d{10}$/;
         if (!phoneRegex.test(formData.phoneNumber)) {
             setPhoneError('Phone number must be exactly 10 digits');
+            return;
+        }
+
+        // Password Validation
+        if (formData.password.length < 6) {
+            setPasswordError('Password must be at least 6 characters long');
             return;
         }
 
@@ -148,19 +170,24 @@ export default function College() {
         <div style={styles.wrapper as any}>
             <div style={styles.card as any}>
                 <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '24px' }}>
-                    <a href="https://www.logicbox.ac/"><img src={logo} alt="LogicBox Logo" style={{ height: '40px' }} /></a>
+                    <a href="https://www.tradetalks.co.in/kerala-traders-summit"><img src={logo} alt="LogicBox Logo" style={{ height: '40px' }} /></a>
                 </div>
                 <h1 style={styles.title as any}>Registration</h1>
                 <p style={styles.subtitle as any}>Partner with us to empower your students</p>
 
                 <div style={styles.inputGroup as any}>
-                    <input
-                        style={styles.input as any}
-                        name="name"
-                        value={formData.name}
-                        onChange={handleChange}
-                        placeholder="Full Name"
-                    />
+                    <div>
+                        <input
+                            style={{ ...styles.input, borderColor: nameError ? '#ef4444' : '#cbd5e1' } as any}
+                            name="name"
+                            value={formData.name}
+                            onChange={handleChange}
+                            placeholder="Full Name"
+                            onFocus={(e) => !nameError && (e.currentTarget.style.borderColor = '#2563eb')}
+                            onBlur={(e) => !nameError && (e.currentTarget.style.borderColor = '#cbd5e1')}
+                        />
+                        {nameError && <span style={{ color: '#ef4444', fontSize: '0.75rem', marginTop: '4px', display: 'block' }}>{nameError}</span>}
+                    </div>
                     <div>
                         <input
                             style={{ ...styles.input, borderColor: emailError ? '#ef4444' : '#cbd5e1' } as any}
@@ -174,14 +201,19 @@ export default function College() {
                         />
                         {emailError && <span style={{ color: '#ef4444', fontSize: '0.75rem', marginTop: '4px', display: 'block' }}>{emailError}</span>}
                     </div>
-                    <input
-                        style={styles.input as any}
-                        name="password"
-                        value={formData.password}
-                        onChange={handleChange}
-                        type="password"
-                        placeholder="Create Password"
-                    />
+                    <div>
+                        <input
+                            style={{ ...styles.input, borderColor: passwordError ? '#ef4444' : '#cbd5e1' } as any}
+                            name="password"
+                            value={formData.password}
+                            onChange={handleChange}
+                            type="password"
+                            placeholder="Create Password"
+                            onFocus={(e) => !passwordError && (e.currentTarget.style.borderColor = '#2563eb')}
+                            onBlur={(e) => !passwordError && (e.currentTarget.style.borderColor = '#cbd5e1')}
+                        />
+                        {passwordError && <span style={{ color: '#ef4444', fontSize: '0.75rem', marginTop: '4px', display: 'block' }}>{passwordError}</span>}
+                    </div>
                     <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '12px' }}>
                         <div>
                             <input

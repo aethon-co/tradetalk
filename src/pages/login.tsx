@@ -8,6 +8,7 @@ import logo from '../assets/tradeTalks.svg';
 export default function Login() {
     const navigate = useNavigate();
     const [phoneError, setPhoneError] = useState('');
+    const [passwordError, setPasswordError] = useState('');
     const [formData, setFormData] = useState({
         phoneNumber: '',
         password: '',
@@ -29,12 +30,18 @@ export default function Login() {
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
         if (e.target.name === 'phoneNumber') setPhoneError('');
+        if (e.target.name === 'password') setPasswordError('');
     };
 
     const handleSubmit = () => {
         const phoneRegex = /^\d{10}$/;
         if (!phoneRegex.test(formData.phoneNumber)) {
             setPhoneError('Phone number must be exactly 10 digits');
+            return;
+        }
+
+        if (formData.password.length < 6) {
+            setPasswordError('Password must be at least 6 characters long');
             return;
         }
         mutation.mutate(formData);
@@ -121,7 +128,7 @@ export default function Login() {
         <div style={styles.wrapper as any}>
             <div style={styles.card as any}>
                 <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '24px' }}>
-                    <a href="https://www.logicbox.ac/"><img src={logo} alt="LogicBox Logo" style={{ height: '40px' }} /></a>
+                    <a href="https://www.tradetalks.co.in/kerala-traders-summit"><img src={logo} alt="LogicBox Logo" style={{ height: '40px' }} /></a>
                 </div>
                 <h1 style={styles.title as any}>Welcome Back</h1>
                 <p style={styles.subtitle as any}>Enter your credentials to access your account</p>
@@ -150,16 +157,23 @@ export default function Login() {
                         )}
                     </div>
 
-                    <input
-                        style={styles.input as any}
-                        name="password"
-                        value={formData.password}
-                        onChange={handleChange}
-                        type="password"
-                        placeholder="Password"
-                        onFocus={(e) => (e.currentTarget.style.borderColor = '#2563eb')}
-                        onBlur={(e) => (e.currentTarget.style.borderColor = '#cbd5e1')}
-                    />
+                    <div>
+                        <input
+                            style={{ ...styles.input, borderColor: passwordError ? '#ef4444' : '#cbd5e1' } as any}
+                            name="password"
+                            value={formData.password}
+                            onChange={handleChange}
+                            type="password"
+                            placeholder="Password"
+                            onFocus={(e) => !passwordError && (e.currentTarget.style.borderColor = '#2563eb')}
+                            onBlur={(e) => !passwordError && (e.currentTarget.style.borderColor = '#cbd5e1')}
+                        />
+                        {passwordError && (
+                            <span style={{ color: '#ef4444', fontSize: '0.75rem', marginTop: '4px', display: 'block' }}>
+                                {passwordError}
+                            </span>
+                        )}
+                    </div>
                 </div>
 
                 <button

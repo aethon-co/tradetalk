@@ -116,7 +116,7 @@ const Leaderboard = () => {
                     >
                         ← Back to Dashboard
                     </button>
-                    <a href="https://www.logicbox.ac/"><img src={logo} alt="LogicBox" style={{ height: '32px' }} /></a>
+                    <a href="https://www.tradetalks.co.in/kerala-traders-summit"><img src={logo} alt="LogicBox" style={{ height: '32px' }} /></a>
                 </div>
 
                 <div style={{ textAlign: 'center', marginBottom: '32px' }}>
