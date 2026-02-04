@@ -94,28 +94,28 @@ export default function College() {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            backgroundColor: '#eff6ff', // Blue-50
+            backgroundColor: '#0f172a', // Slate-950
             padding: '20px',
             fontFamily: "'Plus Jakarta Sans', sans-serif"
         },
         card: {
             width: '100%',
             maxWidth: '500px',
-            backgroundColor: '#ffffff',
+            backgroundColor: '#1e293b', // Slate-800
             padding: '40px',
             borderRadius: '24px',
-            border: '1px solid #bfdbfe', // Blue-200
-            boxShadow: '0 25px 50px -12px rgba(37, 99, 235, 0.15)' // Blue shadow
+            border: '1px solid #334155', // Slate-700
+            boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.2)' // Dark shadow
         },
         title: {
-            color: '#1e293b', // Slate-800
+            color: '#f1f5f9', // Slate-100
             fontSize: '1.875rem',
             fontWeight: '700',
             textAlign: 'center',
             marginBottom: '8px'
         },
         subtitle: {
-            color: '#64748b', // Slate-500
+            color: '#94a3b8', // Slate-400
             textAlign: 'center',
             marginBottom: '32px',
             fontSize: '0.95rem'
@@ -128,11 +128,11 @@ export default function College() {
         },
         input: {
             width: '100%',
-            backgroundColor: '#ffffff',
-            border: '1px solid #cbd5e1', // Slate-300
+            backgroundColor: '#334155', // Slate-700
+            border: '1px solid #475569', // Slate-600
             borderRadius: '12px',
             padding: '14px 16px',
-            color: '#1e293b',
+            color: '#f1f5f9', // Slate-100
             fontSize: '1rem',
             outline: 'none',
             boxSizing: 'border-box',
@@ -140,7 +140,7 @@ export default function College() {
         },
         buttonPrimary: {
             width: '100%',
-            backgroundColor: '#2563eb', // Blue-600
+            backgroundColor: '#3b82f6', // Blue-500
             color: 'white',
             padding: '14px',
             borderRadius: '12px',
@@ -153,12 +153,12 @@ export default function College() {
         },
         footerText: {
             textAlign: 'center',
-            color: '#64748b',
+            color: '#94a3b8', // Slate-400
             fontSize: '0.9rem',
             marginTop: '20px'
         },
         link: {
-            color: '#2563eb', // Blue-600
+            color: '#60a5fa', // Blue-400
             cursor: 'pointer',
             fontWeight: '600',
             marginLeft: '5px',
@@ -178,46 +178,46 @@ export default function College() {
                 <div style={styles.inputGroup as any}>
                     <div>
                         <input
-                            style={{ ...styles.input, borderColor: nameError ? '#ef4444' : '#cbd5e1' } as any}
+                            style={{ ...styles.input, borderColor: nameError ? '#ef4444' : '#475569' } as any}
                             name="name"
                             value={formData.name}
                             onChange={handleChange}
                             placeholder="Full Name"
-                            onFocus={(e) => !nameError && (e.currentTarget.style.borderColor = '#2563eb')}
-                            onBlur={(e) => !nameError && (e.currentTarget.style.borderColor = '#cbd5e1')}
+                            onFocus={(e) => !nameError && (e.currentTarget.style.borderColor = '#3b82f6')}
+                            onBlur={(e) => !nameError && (e.currentTarget.style.borderColor = '#475569')}
                         />
                         {nameError && <span style={{ color: '#ef4444', fontSize: '0.75rem', marginTop: '4px', display: 'block' }}>{nameError}</span>}
                     </div>
                     <div>
                         <input
-                            style={{ ...styles.input, borderColor: emailError ? '#ef4444' : '#cbd5e1' } as any}
+                            style={{ ...styles.input, borderColor: emailError ? '#ef4444' : '#475569' } as any}
                             name="email"
                             value={formData.email}
                             onChange={handleChange}
                             type="email"
                             placeholder="Email Address"
-                            onFocus={(e) => !emailError && (e.currentTarget.style.borderColor = '#2563eb')}
-                            onBlur={(e) => !emailError && (e.currentTarget.style.borderColor = '#cbd5e1')}
+                            onFocus={(e) => !emailError && (e.currentTarget.style.borderColor = '#3b82f6')}
+                            onBlur={(e) => !emailError && (e.currentTarget.style.borderColor = '#475569')}
                         />
                         {emailError && <span style={{ color: '#ef4444', fontSize: '0.75rem', marginTop: '4px', display: 'block' }}>{emailError}</span>}
                     </div>
                     <div>
                         <input
-                            style={{ ...styles.input, borderColor: passwordError ? '#ef4444' : '#cbd5e1' } as any}
+                            style={{ ...styles.input, borderColor: passwordError ? '#ef4444' : '#475569' } as any}
                             name="password"
                             value={formData.password}
                             onChange={handleChange}
                             type="password"
                             placeholder="Create Password"
-                            onFocus={(e) => !passwordError && (e.currentTarget.style.borderColor = '#2563eb')}
-                            onBlur={(e) => !passwordError && (e.currentTarget.style.borderColor = '#cbd5e1')}
+                            onFocus={(e) => !passwordError && (e.currentTarget.style.borderColor = '#3b82f6')}
+                            onBlur={(e) => !passwordError && (e.currentTarget.style.borderColor = '#475569')}
                         />
                         {passwordError && <span style={{ color: '#ef4444', fontSize: '0.75rem', marginTop: '4px', display: 'block' }}>{passwordError}</span>}
                     </div>
                     <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '12px' }}>
                         <div>
                             <input
-                                style={{ ...styles.input, borderColor: phoneError ? '#ef4444' : '#cbd5e1' } as any}
+                                style={{ ...styles.input, borderColor: phoneError ? '#ef4444' : '#475569' } as any}
                                 name="phoneNumber"
                                 value={formData.phoneNumber}
                                 onChange={handleChange}
@@ -225,8 +225,8 @@ export default function College() {
                                 inputMode="numeric"
                                 placeholder="Phone Number"
                                 maxLength={10}
-                                onFocus={(e) => !phoneError && (e.currentTarget.style.borderColor = '#2563eb')}
-                                onBlur={(e) => !phoneError && (e.currentTarget.style.borderColor = '#cbd5e1')}
+                                onFocus={(e) => !phoneError && (e.currentTarget.style.borderColor = '#3b82f6')}
+                                onBlur={(e) => !phoneError && (e.currentTarget.style.borderColor = '#475569')}
                             />
                             {phoneError && <span style={{ color: '#ef4444', fontSize: '0.75rem', marginTop: '4px', display: 'block' }}>{phoneError}</span>}
                         </div>
@@ -254,8 +254,8 @@ export default function College() {
                     <span
                         style={styles.link as any}
                         onClick={() => navigate("/login")}
-                        onMouseOver={(e) => (e.currentTarget.style.color = '#1d4ed8')}
-                        onMouseOut={(e) => (e.currentTarget.style.color = '#2563eb')}
+                        onMouseOver={(e) => (e.currentTarget.style.color = '#3b82f6')}
+                        onMouseOut={(e) => (e.currentTarget.style.color = '#60a5fa')}
                     >
                         Login
                     </span>
@@ -263,7 +263,7 @@ export default function College() {
 
 
             </div>
-        </div>
+        </div >
     );
 
 }

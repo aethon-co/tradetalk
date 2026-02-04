@@ -53,28 +53,28 @@ export default function Login() {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            backgroundColor: '#eff6ff', // Blue-50
+            backgroundColor: '#0f172a', // Slate-950
             padding: '20px',
             fontFamily: "'Plus Jakarta Sans', sans-serif"
         },
         card: {
             width: '100%',
             maxWidth: '450px',
-            backgroundColor: '#ffffff',
+            backgroundColor: '#1e293b', // Slate-800
             padding: '40px',
             borderRadius: '24px',
-            border: '1px solid #bfdbfe', // Blue-200
-            boxShadow: '0 25px 50px -12px rgba(37, 99, 235, 0.15)' // Blue shadow
+            border: '1px solid #334155', // Slate-700
+            boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.2)' // Dark shadow
         },
         title: {
-            color: '#1e293b', // Slate-800
+            color: '#f1f5f9', // Slate-100
             fontSize: '1.875rem',
             fontWeight: '700',
             textAlign: 'center',
             marginBottom: '8px'
         },
         subtitle: {
-            color: '#64748b', // Slate-500
+            color: '#94a3b8', // Slate-400
             textAlign: 'center',
             marginBottom: '32px',
             fontSize: '0.95rem'
@@ -87,11 +87,11 @@ export default function Login() {
         },
         input: {
             width: '100%',
-            backgroundColor: '#ffffff',
-            border: '1px solid #cbd5e1', // Slate-300
+            backgroundColor: '#334155', // Slate-700
+            border: '1px solid #475569', // Slate-600
             borderRadius: '12px',
             padding: '14px 16px',
-            color: '#1e293b',
+            color: '#f1f5f9', // Slate-100
             fontSize: '1rem',
             outline: 'none',
             boxSizing: 'border-box',
@@ -99,7 +99,7 @@ export default function Login() {
         },
         buttonPrimary: {
             width: '100%',
-            backgroundColor: '#2563eb', // Blue-600
+            backgroundColor: '#3b82f6', // Blue-500 (brighter for dark mode)
             color: 'white',
             padding: '14px',
             borderRadius: '12px',
@@ -111,12 +111,12 @@ export default function Login() {
         },
         footerText: {
             textAlign: 'center',
-            color: '#64748b',
+            color: '#94a3b8', // Slate-400
             fontSize: '0.9rem',
             marginTop: '20px'
         },
         link: {
-            color: '#2563eb', // Blue-600
+            color: '#60a5fa', // Blue-400
             cursor: 'pointer',
             fontWeight: '600',
             marginLeft: '5px',
@@ -138,7 +138,7 @@ export default function Login() {
                         <input
                             style={{
                                 ...styles.input,
-                                borderColor: phoneError ? '#ef4444' : '#cbd5e1'
+                                borderColor: phoneError ? '#ef4444' : '#475569'
                             } as any}
                             name="phoneNumber"
                             value={formData.phoneNumber}
@@ -147,8 +147,8 @@ export default function Login() {
                             inputMode="numeric"
                             maxLength={10}
                             placeholder="Phone Number"
-                            onFocus={(e) => !phoneError && (e.currentTarget.style.borderColor = '#2563eb')}
-                            onBlur={(e) => !phoneError && (e.currentTarget.style.borderColor = '#cbd5e1')}
+                            onFocus={(e) => !phoneError && (e.currentTarget.style.borderColor = '#3b82f6')}
+                            onBlur={(e) => !phoneError && (e.currentTarget.style.borderColor = '#475569')}
                         />
                         {phoneError && (
                             <span style={{ color: '#ef4444', fontSize: '0.75rem', marginTop: '4px', display: 'block' }}>
@@ -159,14 +159,14 @@ export default function Login() {
 
                     <div>
                         <input
-                            style={{ ...styles.input, borderColor: passwordError ? '#ef4444' : '#cbd5e1' } as any}
+                            style={{ ...styles.input, borderColor: passwordError ? '#ef4444' : '#475569' } as any}
                             name="password"
                             value={formData.password}
                             onChange={handleChange}
                             type="password"
                             placeholder="Password"
-                            onFocus={(e) => !passwordError && (e.currentTarget.style.borderColor = '#2563eb')}
-                            onBlur={(e) => !passwordError && (e.currentTarget.style.borderColor = '#cbd5e1')}
+                            onFocus={(e) => !passwordError && (e.currentTarget.style.borderColor = '#3b82f6')}
+                            onBlur={(e) => !passwordError && (e.currentTarget.style.borderColor = '#475569')}
                         />
                         {passwordError && (
                             <span style={{ color: '#ef4444', fontSize: '0.75rem', marginTop: '4px', display: 'block' }}>
@@ -183,8 +183,8 @@ export default function Login() {
                     } as any}
                     onClick={handleSubmit}
                     disabled={mutation.isPending}
-                    onMouseOver={(e) => (e.currentTarget.style.backgroundColor = '#1d4ed8')}
-                    onMouseOut={(e) => (e.currentTarget.style.backgroundColor = '#2563eb')}
+                    onMouseOver={(e) => (e.currentTarget.style.backgroundColor = '#2563eb')}
+                    onMouseOut={(e) => (e.currentTarget.style.backgroundColor = '#3b82f6')}
                 >
                     {mutation.isPending ? "Signing in..." : "Login"}
                 </button>
@@ -194,8 +194,8 @@ export default function Login() {
                     <span
                         style={styles.link as any}
                         onClick={() => navigate("/")}
-                        onMouseOver={(e) => (e.currentTarget.style.color = '#1d4ed8')}
-                        onMouseOut={(e) => (e.currentTarget.style.color = '#2563eb')}
+                        onMouseOver={(e) => (e.currentTarget.style.color = '#3b82f6')}
+                        onMouseOut={(e) => (e.currentTarget.style.color = '#60a5fa')}
                     >
                         Register
                     </span>

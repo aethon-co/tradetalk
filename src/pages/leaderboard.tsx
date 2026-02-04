@@ -22,7 +22,7 @@ const Leaderboard = () => {
     const styles = {
         wrapper: {
             minHeight: '100vh',
-            backgroundColor: '#eff6ff', // Blue-50
+            backgroundColor: '#0f172a', // Slate-950
             padding: isMobile ? '20px' : '40px',
             fontFamily: "'Plus Jakarta Sans', sans-serif"
         },
@@ -38,11 +38,11 @@ const Leaderboard = () => {
         },
         backButton: {
             backgroundColor: 'transparent',
-            border: '1px solid #bfdbfe', // Blue-200
+            border: '1px solid #334155', // Slate-700
             padding: '8px 16px',
             borderRadius: '8px',
             cursor: 'pointer',
-            color: '#2563eb', // Blue-600
+            color: '#60a5fa', // Blue-400
             fontWeight: '600',
             fontSize: '0.9rem',
             transition: 'all 0.2s',
@@ -51,10 +51,10 @@ const Leaderboard = () => {
             gap: '6px'
         },
         card: {
-            backgroundColor: '#ffffff',
+            backgroundColor: '#1e293b', // Slate-800
             borderRadius: '24px',
-            border: '1px solid #bfdbfe', // Blue-200
-            boxShadow: '0 10px 15px -3px rgba(249, 115, 22, 0.05)',
+            border: '1px solid #334155', // Slate-700
+            boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.2)',
             overflow: 'hidden'
         },
         table: {
@@ -64,18 +64,18 @@ const Leaderboard = () => {
         th: {
             textAlign: 'left' as const,
             padding: '16px 24px',
-            backgroundColor: '#eff6ff', // Blue-50
-            color: '#64748b', // Slate-500
+            backgroundColor: '#0f172a', // Slate-950
+            color: '#94a3b8', // Slate-400
             fontSize: '0.75rem',
             fontWeight: '700',
             textTransform: 'uppercase' as const,
             letterSpacing: '0.05em',
-            borderBottom: '1px solid #bfdbfe'
+            borderBottom: '1px solid #334155' // Slate-700
         },
         td: {
             padding: '16px 24px',
-            borderBottom: '1px solid #f1f5f9',
-            color: '#1e293b', // Slate-800
+            borderBottom: '1px solid #334155', // Slate-700
+            color: '#e2e8f0', // Slate-200
             fontSize: '0.95rem'
         },
         rankBadge: {
@@ -88,10 +88,20 @@ const Leaderboard = () => {
             fontWeight: '700',
             fontSize: '0.9rem'
         },
-        gold: { backgroundColor: '#dbeafe', color: '#1e40af', border: '1px solid #93c5fd' }, // Blue-100/800/300
-        silver: { backgroundColor: '#f1f5f9', color: '#475569', border: '1px solid #cbd5e1' }, // Slate-100/600/300
-        bronze: { backgroundColor: '#e0f2fe', color: '#0369a1', border: '1px solid #7dd3fc' }, // Sky-100/700/300
-        defaultRank: { color: '#64748b' }
+        gold: { backgroundColor: 'rgba(59, 130, 246, 0.2)', color: '#60a5fa', border: '1px solid #1d4ed8' },
+        silver: { backgroundColor: '#334155', color: '#f1f5f9', border: '1px solid #64748b' },
+        bronze: { backgroundColor: 'rgba(12, 74, 110, 0.4)', color: '#38bdf8', border: '1px solid #0369a1' },
+        // Let's stick to blueish theme but distinct.
+        // Actually bronze is usually brownish.
+        // Let's use darker variants of provided colors.
+        // gold: Blue-900
+        // silver: Slate-700
+        // bronze: Amber-900? Or just another slate?
+        // Let's try:
+        // Silver: #334155 (Slate 700)
+        // Bronze: #7c2d12 (Amber 900) ? 
+        // Reverting to simpler dark theme badges:
+        defaultRank: { color: '#94a3b8' } // Slate-400
     };
 
     const getRankStyle = (index: number) => {
@@ -111,7 +121,7 @@ const Leaderboard = () => {
                     <button
                         style={styles.backButton}
                         onClick={() => navigate('/home')}
-                        onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#eff6ff'}
+                        onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#1e293b'}
                         onMouseOut={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
                     >
                         ← Back to Dashboard
@@ -120,8 +130,8 @@ const Leaderboard = () => {
                 </div>
 
                 <div style={{ textAlign: 'center', marginBottom: '32px' }}>
-                    <h1 style={{ fontSize: '2rem', fontWeight: '700', color: '#1e293b', marginBottom: '8px' }}>Top Performers</h1>
-                    <p style={{ color: '#64748b' }}>Celebrating our top performing representatives</p>
+                    <h1 style={{ fontSize: '2rem', fontWeight: '700', color: '#f1f5f9', marginBottom: '8px' }}>Top Performers</h1>
+                    <p style={{ color: '#94a3b8' }}>Celebrating our top performing representatives</p>
                 </div>
 
                 <div style={styles.card}>
@@ -135,14 +145,14 @@ const Leaderboard = () => {
                         </thead>
                         <tbody>
                             {leaderboard.map((user: any, index: number) => (
-                                <tr key={user._id || index} style={{ backgroundColor: index < 3 ? '#ffffff' : '#ffffff' }}>
+                                <tr key={user._id || index} style={{ backgroundColor: '#1e293b' }}>
                                     <td style={{ ...styles.td, textAlign: 'center' }}>
                                         <span style={{ ...styles.rankBadge, ...getRankStyle(index) }}>{index + 1}</span>
                                     </td>
                                     <td style={{ ...styles.td, fontWeight: '600' }}>
                                         {user.name}
                                     </td>
-                                    <td style={{ ...styles.td, textAlign: 'right', fontWeight: '700', color: '#2563eb' }}>{user.referralCount}</td>
+                                    <td style={{ ...styles.td, textAlign: 'right', fontWeight: '700', color: '#60a5fa' }}>{user.referralCount}</td>
                                 </tr>
                             ))}
                         </tbody>

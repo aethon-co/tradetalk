@@ -32,7 +32,8 @@ const Dashboard = () => {
         return <Navigate to="/login" replace />;
     }
 
-    const { collegeUser, referrals = [] } = data || {};
+    const { collegeUser } = data || {};
+    const referrals = collegeUser?.referrals || [];
 
     const enabledReferrals = referrals.filter((student: any) => student.isEnabled === true);
 
@@ -63,10 +64,10 @@ const Dashboard = () => {
     const styles = {
         container: {
             padding: isMobile ? "20px 16px 120px 16px" : "40px 60px",
-            backgroundColor: "#eff6ff", // Blue-50
+            backgroundColor: "#0f172a", // Slate-950
             minHeight: "100vh",
             fontFamily: "'Plus Jakarta Sans', sans-serif",
-            color: "#1e293b" // Slate-800
+            color: "#f1f5f9" // Slate-100
         },
         nav: {
             display: "flex",
@@ -76,8 +77,8 @@ const Dashboard = () => {
             marginBottom: isMobile ? "24px" : "40px"
         },
         referralCard: {
-            background: "#ffffff",
-            border: "1px solid #bfdbfe", // Blue-200
+            background: "#1e293b", // Slate-800
+            border: "1px solid #334155", // Slate-700
             borderRadius: "16px",
             padding: "16px 20px",
             display: "flex",
@@ -111,39 +112,39 @@ const Dashboard = () => {
             marginBottom: "40px"
         },
         card: {
-            background: "#ffffff",
+            background: "#1e293b", // Slate-800
             padding: isMobile ? "24px" : "32px",
             borderRadius: "24px",
-            border: "1px solid #bfdbfe", // Blue-200
-            boxShadow: "0 10px 15px -3px rgba(37, 99, 235, 0.05)"
+            border: "1px solid #334155", // Slate-700
+            boxShadow: "0 10px 15px -3px rgba(0, 0, 0, 0.2)"
         },
         tableWrapper: {
-            background: "#ffffff",
+            background: "#1e293b", // Slate-800
             borderRadius: "24px",
-            border: "1px solid #bfdbfe", // Blue-200
+            border: "1px solid #334155", // Slate-700
             overflow: "hidden",
-            boxShadow: "0 10px 15px -3px rgba(37, 99, 235, 0.05)"
+            boxShadow: "0 10px 15px -3px rgba(0, 0, 0, 0.2)"
         },
         table: { width: "100%", borderCollapse: "separate" as const, borderSpacing: "0" },
         th: {
             textAlign: "left" as const,
             padding: "16px 24px",
-            backgroundColor: "#eff6ff", // Blue-50
-            color: "#64748b", // Slate-500
+            backgroundColor: "#0f172a", // Slate-950
+            color: "#94a3b8", // Slate-400
             fontSize: "0.7rem",
             textTransform: "uppercase" as const,
             letterSpacing: "0.1em",
-            borderBottom: "1px solid #bfdbfe"
+            borderBottom: "1px solid #334155" // Slate-700
         },
         td: {
             padding: "16px 24px",
-            borderBottom: "1px solid #f1f5f9", // Slate-100
+            borderBottom: "1px solid #334155", // Slate-700
             fontSize: "0.95rem",
-            color: "#1e293b"
+            color: "#e2e8f0" // Slate-200
         },
         mobileRow: {
             padding: "20px",
-            borderBottom: "1px solid #f1f5f9",
+            borderBottom: "1px solid #334155", // Slate-700
             display: "flex",
             flexDirection: "column" as const,
             gap: "12px"
@@ -156,21 +157,21 @@ const Dashboard = () => {
 
 
         badge: {
-            backgroundColor: "#e0f2fe", // Sky-100
-            color: "#0284c7", // Sky-600
+            backgroundColor: "#1e293b", // Slate-800
+            color: "#38bdf8", // Sky-400
             padding: "4px 10px",
             borderRadius: "6px",
             fontSize: "0.75rem",
             fontWeight: "600",
-            border: "1px solid #bae6fd" // Sky-200
+            border: "1px solid #0c4a6e" // Sky-900 (or Slate-700) - let's use dark blueish
         },
         loader: {
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
             height: "100vh",
-            backgroundColor: "#eff6ff",
-            color: "#2563eb",
+            backgroundColor: "#0f172a",
+            color: "#3b82f6",
             fontSize: "1.2rem"
         }
     };
@@ -184,7 +185,7 @@ const Dashboard = () => {
             <div style={styles.nav}>
                 <div>
                     <a href="https://www.tradetalks.co.in/kerala-traders-summit"><img src={logo} alt="LogicBox" style={{ height: isMobile ? "32px" : "48px" }} /></a>
-                    <p style={{ color: "#64748b", marginTop: "4px", fontSize: "0.9rem" }}>Manage your referrals and uploads</p>
+                    <p style={{ color: "#94a3b8", marginTop: "4px", fontSize: "0.9rem" }}>Manage your referrals and uploads</p>
                 </div>
                 {isMobile && (
                     <button onClick={handleLogout} style={styles.logoutBtn}>
@@ -196,29 +197,29 @@ const Dashboard = () => {
             <div
                 style={styles.referralCard as any}
                 onClick={handleCopyLink}
-                onMouseOver={(e) => (e.currentTarget.style.borderColor = "#2563eb")}
-                onMouseOut={(e) => (e.currentTarget.style.borderColor = "#bfdbfe")}
+                onMouseOver={(e) => (e.currentTarget.style.borderColor = "#3b82f6")}
+                onMouseOut={(e) => (e.currentTarget.style.borderColor = "#334155")}
             >
                 <div>
-                    <p style={{ margin: 0, fontSize: "0.75rem", color: "#2563eb", fontWeight: 700, textTransform: "uppercase" }}>Your Referral Link</p>
-                    <p style={{ margin: "4px 0 0 0", fontSize: isMobile ? "0.85rem" : "1rem", color: "#334155", opacity: 0.8 }}>
+                    <p style={{ margin: 0, fontSize: "0.75rem", color: "#60a5fa", fontWeight: 700, textTransform: "uppercase" }}>Your Referral Link</p>
+                    <p style={{ margin: "4px 0 0 0", fontSize: isMobile ? "0.85rem" : "1rem", color: "#cbd5e1", opacity: 0.8 }}>
                         {`https://tradetalk-auth.vercel.app/register/${collegeUser?.referralCode}`}
                     </p>
                 </div>
-                <div style={{ backgroundColor: copied ? "#10b981" : "#2563eb", color: "white", padding: "8px 16px", borderRadius: "8px", fontSize: "0.8rem", fontWeight: 600 }}>
+                <div style={{ backgroundColor: copied ? "#10b981" : "#3b82f6", color: "white", padding: "8px 16px", borderRadius: "8px", fontSize: "0.8rem", fontWeight: 600 }}>
                     {copied ? "Copied!" : "Copy"}
                 </div>
             </div>
 
             <div style={styles.statsContainer}>
                 <div style={styles.card}>
-                    <p style={{ color: "#64748b", margin: "0 0 8px 0", fontSize: "0.75rem", fontWeight: "600" }}>REPRESENTATIVE</p>
-                    <h2 style={{ margin: 0, fontSize: "1.4rem", color: "#1e293b" }}>{collegeUser?.name}</h2>
+                    <p style={{ color: "#94a3b8", margin: "0 0 8px 0", fontSize: "0.75rem", fontWeight: "600" }}>REPRESENTATIVE</p>
+                    <h2 style={{ margin: 0, fontSize: "1.4rem", color: "#f1f5f9" }}>{collegeUser?.name}</h2>
                 </div>
 
                 <div style={styles.card}>
-                    <p style={{ color: "#64748b", margin: "0 0 8px 0", fontSize: "0.75rem", fontWeight: "600" }}>TOTAL REFERRALS</p>
-                    <h2 style={{ margin: 0, fontSize: "1.4rem", color: "#1e293b" }}>{collegeUser?.referralCount || 0}</h2>
+                    <p style={{ color: "#94a3b8", margin: "0 0 8px 0", fontSize: "0.75rem", fontWeight: "600" }}>TOTAL REFERRALS</p>
+                    <h2 style={{ margin: 0, fontSize: "1.4rem", color: "#f1f5f9" }}>{collegeUser?.referralCount || 0}</h2>
                 </div>
                 <div
                     style={{ ...styles.card, cursor: 'pointer', transition: 'transform 0.2s' } as any}
@@ -228,19 +229,19 @@ const Dashboard = () => {
                 >
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                         <div>
-                            <p style={{ color: "#64748b", margin: "0 0 8px 0", fontSize: "0.75rem", fontWeight: "600", display: 'flex', alignItems: 'center', gap: '4px' }}>
+                            <p style={{ color: "#94a3b8", margin: "0 0 8px 0", fontSize: "0.75rem", fontWeight: "600", display: 'flex', alignItems: 'center', gap: '4px' }}>
                                 YOUR RANK <span style={{ fontSize: '0.9rem' }}>🏆</span>
                             </p>
-                            <h2 style={{ margin: 0, fontSize: "1.4rem", color: "#2563eb" }}>#{collegeUser?.rank || '-'}</h2>
+                            <h2 style={{ margin: 0, fontSize: "1.4rem", color: "#60a5fa" }}>#{collegeUser?.rank || '-'}</h2>
                         </div>
-                        <div style={{ color: "#2563eb", opacity: 0.5 }}>➜</div>
+                        <div style={{ color: "#60a5fa", opacity: 0.5 }}>➜</div>
                     </div>
                 </div>
             </div>
 
             <div style={styles.tableWrapper}>
-                <div style={{ padding: "20px 24px", borderBottom: "1px solid #f1f5f9" }}>
-                    <h3 style={{ margin: 0, fontSize: "1rem", color: "#1e293b" }}>Enrolled Students</h3>
+                <div style={{ padding: "20px 24px", borderBottom: "1px solid #334155" }}>
+                    <h3 style={{ margin: 0, fontSize: "1rem", color: "#f1f5f9" }}>Referred Users</h3>
                 </div>
 
                 {isMobile ? (
@@ -249,7 +250,7 @@ const Dashboard = () => {
                             <div key={student._id} style={styles.mobileRow}>
                                 <div style={{ display: "flex", justifyContent: "space-between" }}>
                                     <div>
-                                        <div style={{ fontWeight: "600", color: "#1e293b" }}>{student.name}</div>
+                                        <div style={{ fontWeight: "600", color: "#f1f5f9" }}>{student.name}</div>
                                         <span style={styles.badge}>{student.phoneNumber}</span>
                                     </div>
                                 </div>
