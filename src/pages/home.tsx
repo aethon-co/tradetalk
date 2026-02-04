@@ -9,7 +9,7 @@ import toast from "react-hot-toast";
 const Dashboard = () => {
     const navigate = useNavigate();
     const queryClient = useQueryClient();
-    const token = localStorage.getItem("token");
+    // const token = localStorage.getItem("token"); // Removed
 
     const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
     const [copied, setCopied] = useState(false);
@@ -25,20 +25,39 @@ const Dashboard = () => {
     const { data, isLoading, error } = useQuery({
         queryKey: ["userMe"],
         queryFn: getMe,
-        enabled: !!token,
+        retry: false, // Don't retry if 401
     });
 
-    if (!token) {
+    // We no longer check for token in localStorage.
+    // Instead we rely on the query to succeed or fail (401).
+    // If the query fails with 401, we redirect.
+    // However, since we might have 'user' in localStorage, we can check that for instant auth state?
+    // Or just rely on isLoading.
+
+    if (!isLoading && error) {
         return <Navigate to="/login" replace />;
     }
+
+    // If we want to prevent flash of content before load? 
+    // The previous check `if (!token)` was instant.
+    // Now we must wait for query.
+
 
     const { collegeUser } = data || {};
     const referrals = collegeUser?.referrals || [];
 
     const enabledReferrals = referrals.filter((student: any) => student.isEnabled === true);
 
-    const handleLogout = () => {
-        localStorage.removeItem("token");
+    const handleLogout = async () => {
+        try {
+            await fetch(`${import.meta.env.VITE_SERVER_URL}api/v1/user/logout`, {
+                method: "POST",
+                credentials: "include"
+            });
+        } catch (error) {
+            console.error("Logout failed", error);
+        }
+        // localStorage.removeItem("token"); // No longer used
         localStorage.removeItem("user");
         queryClient.clear();
         navigate("/login");

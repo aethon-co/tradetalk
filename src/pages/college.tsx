@@ -39,9 +39,8 @@ export default function College() {
             delete payload.referralCode;
             return signupUser(payload);
         },
-        onSuccess: (data) => {
-            localStorage.setItem("token", data.token);
-            localStorage.setItem("user", JSON.stringify(data.user));
+        onSuccess: () => {
+            // localStorage.setItem("user", JSON.stringify(data.user)); // Removed
             toast.success("Account created successfully!");
             navigate("/home");
         },

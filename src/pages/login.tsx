@@ -17,10 +17,12 @@ export default function Login() {
     const mutation = useMutation({
         mutationFn: loginUser,
         onSuccess: (data) => {
-            localStorage.setItem("token", data.token);
-            localStorage.setItem("user", JSON.stringify(data.user));
-            toast.success("Login successful");
-            navigate("/home");
+            if (data.user) {
+                // We don't store token anymore (it's in cookie)
+                // localStorage.setItem("user", JSON.stringify(data.user)); // Removed per user request
+                toast.success("Login successful");
+                navigate("/home");
+            }
         },
         onError: (error: any) => {
             toast.error(error.message || "Login failed");

@@ -1,15 +1,16 @@
 export const getMe = async () => {
-    const token = localStorage.getItem("token");
-    const userStr = localStorage.getItem("user");
-    // Handle "undefined" string or null/empty
-    const user = (userStr && userStr !== "undefined") ? JSON.parse(userStr) : {};
-    const response = await fetch(`${import.meta.env.VITE_SERVER_URL}api/v1/user/${user._id}`, {
+    // Check local user for quick invalidation? 
+    // Actually safer to trust the API call. If 401, handle it.
+
+    // Using import.meta.env.VITE_SERVER_URL + "api/v1/user/me"
+    const response = await fetch(`${import.meta.env.VITE_SERVER_URL}api/v1/user/me`, {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
-            "Authorization": `Bearer ${token}`
-        }
+        },
+        credentials: "include" // Important: Sends the cookie
     });
+
     if (!response.ok) {
         const errorData = await response.json();
         throw new Error(errorData.message || "Failed to get user");

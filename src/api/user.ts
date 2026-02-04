@@ -4,6 +4,7 @@ export const signupUser = async (userData: any) => {
         headers: {
             "Content-Type": "application/json",
         },
+        credentials: "include",
         body: JSON.stringify(userData),
     });
     if (!response.ok) {
@@ -19,6 +20,7 @@ export const loginUser = async (credentials: any) => {
         headers: {
             "Content-Type": "application/json",
         },
+        credentials: "include",
         body: JSON.stringify(credentials),
     });
     if (!response.ok) {

@@ -6,6 +6,7 @@ export const deleteStudent = async (id: string) => {
         headers: {
             "Content-Type": "application/json",
         },
+        credentials: "include"
     });
 
     const text = await response.text();
