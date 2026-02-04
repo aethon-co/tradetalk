@@ -172,7 +172,7 @@ export default function College() {
                     <a href="https://www.tradetalks.co.in/kerala-traders-summit"><img src={logo} alt="LogicBox Logo" style={{ height: '40px' }} /></a>
                 </div>
                 <h1 style={styles.title as any}>Registration</h1>
-                <p style={styles.subtitle as any}>Partner with us to empower your students</p>
+                <p style={styles.subtitle as any}>Partner with us </p>
 
                 <div style={styles.inputGroup as any}>
                     <div>
